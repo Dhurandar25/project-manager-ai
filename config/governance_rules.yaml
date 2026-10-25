@@ -1,0 +1,22 @@
+governance:
+  critical_recommendations_require_approval: true
+  audit_all_decisions: true
+  risk:
+    probability_scale: [1, 5]
+    impact_scale: [1, 5]
+    categories:
+      low: [1, 4]
+      medium: [5, 9]
+      high: [10, 16]
+      critical: [17, 25]
+    mitigations:
+      low: Monitor through the normal project review cadence.
+      medium: Assign an owner and review a time-bound mitigation.
+      high: Agree an active mitigation, trigger, owner, and escalation date.
+      critical: Escalate immediately and obtain an approved response plan.
+  health:
+    values: [Green, Amber, Red]
+    red_conditions:
+      - critical_risk_without_approved_mitigation
+      - forecast_exceeds_tolerance
+      - critical_path_blocked

@@ -1,0 +1,63 @@
+daily_review:
+  description: >
+    Review the supplied project data for daily delivery status, milestones,
+    blockers, RAID changes, decisions, and actions. State data gaps explicitly.
+    Project context: {project_context}
+  expected_output: >
+    A concise daily governance review with status, evidence, top issues,
+    accountable actions, and decisions required.
+raid_review:
+  description: >
+    Review risks, assumptions, issues, and dependencies in the provided
+    project context. Identify changes, owners, triggers, and mitigations.
+    Context: {project_context}
+  expected_output: A prioritized RAID review with evidence and actions.
+sprint_review:
+  description: >
+    Evaluate sprint commitments, completed work, carryover, blockers, and
+    forecast against the supplied sprint data. Context: {project_context}
+  expected_output: A sprint outcome summary, variance, and improvement actions.
+dependency_analysis:
+  description: >
+    Analyze cross-team dependencies, ownership, dates, blockers, critical path,
+    and delivery impact using only the supplied context: {project_context}
+  expected_output: A dependency map summary with critical dependencies and actions.
+capacity_analysis:
+  description: >
+    Assess available capacity, allocation, utilization, forecast, and skill gaps
+    from the supplied resource data: {project_context}
+  expected_output: A capacity forecast with constraints, assumptions, and actions.
+budget_analysis:
+  description: >
+    Assess budget, actuals, forecast, variance, and estimate at completion from
+    the supplied financial data: {project_context}
+  expected_output: A budget forecast with variance drivers and approvals needed.
+executive_reporting:
+  description: >
+    Produce an executive report from the supplied evidence. Set health to Green,
+    Amber, or Red; include summary, top risks, budget and capacity forecasts,
+    actions, and upcoming decisions. Context: {project_context}
+  expected_output:   A typed decision-oriented executive report with explicit evidence gaps.
+  output_model: ExecutiveReport
+change_request_analysis:
+  description: >
+    Assess the requested change against scope, schedule, budget, resources,
+    dependencies, and risk; identify required approval role. Context: {project_context}
+  expected_output: A change impact assessment and recommended approval route.
+risk_review:
+  description: >
+    Review identified risks, calculate or verify probability-times-impact scores,
+    and propose mitigations and escalation triggers. Context: {project_context}
+  expected_output: A prioritized risk review with scores and mitigations.
+release_readiness_review:
+  description: >
+    Assess release evidence, unresolved blockers, quality gates, operations,
+    rollback, and required Change Advisory Board approval. Context: {project_context}
+  expected_output: A release readiness recommendation and unresolved conditions.
+approval_gate:
+  description: >
+    Present the recommendation, evidence, required approver role, and decision
+    options. Do not claim that approval was granted. Human decision required:
+    {approval_request}
+  expected_output: A human-entered approval outcome and approver identity.
+  human_input: true

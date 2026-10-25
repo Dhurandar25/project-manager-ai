@@ -1,0 +1,17 @@
+approvals:
+  low_risk:
+    approver: Project Manager
+  high_risk:
+    approver: Programme Manager
+  budget_overrun:
+    approver: Sponsor
+  release:
+    approver: CAB
+  product_owner:
+    approver: Product Owner
+  delivery:
+    approver: Delivery Manager
+  change_request:
+    approver: Change Advisory Board
+  strategic:
+    approver: Steering Committee

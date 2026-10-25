@@ -98,7 +98,16 @@ stakeholder, governance, change, release, and vendor context. Only project name,
 review date, health, and a short project summary are required; other fields can
 be left empty. The crew will be told to identify missing data rather than invent
 it. Review the evidence preview before submitting. A model provider must be
-configured in `.env`.
+configured in `.env` locally or in the deployed app's Streamlit **Settings →
+Secrets** as TOML, for example:
+
+```toml
+OPENAI_API_KEY = "your-provider-key"
+CREWAI_LLM = "openai/gpt-4o-mini"
+```
+
+Secrets are read from Streamlit's managed secret store in the hosted app and
+are not stored in the GitHub repository.
 
 Run a daily governance review from the command line:
 

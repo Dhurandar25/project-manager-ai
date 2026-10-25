@@ -10,6 +10,7 @@ from typing import Any
 
 import streamlit as st
 from dotenv import load_dotenv
+from streamlit.errors import StreamlitSecretNotFoundError
 from pydantic import ValidationError
 
 from tools.project_intake import (
@@ -30,6 +31,19 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)s %(name)s: %(message)s",
 )
 logger = logging.getLogger(__name__)
+
+
+def _get_openai_api_key() -> str | None:
+    """Read the provider key from environment or Streamlit-managed secrets."""
+    api_key = os.getenv("OPENAI_API_KEY")
+    if api_key:
+        return api_key
+    try:
+        secret = st.secrets.get("OPENAI_API_KEY")
+    except StreamlitSecretNotFoundError:
+        return None
+    return secret if isinstance(secret, str) and secret else None
+
 
 st.set_page_config(
     page_title="Project Manager AI | Daily Review",
@@ -287,8 +301,11 @@ if submitted:
         context = intake.to_project_context()
         with st.expander("Review the evidence sent to the AI crew"):
             st.code(context, language="markdown")
-        if not os.getenv("OPENAI_API_KEY"):
-            st.error("OPENAI_API_KEY is not configured. Add a model-provider key to `.env` before running the AI review.")
+        if not _get_openai_api_key():
+            st.error(
+                "OPENAI_API_KEY is not configured. Add it to `.env` locally or to "
+                "your Streamlit app's Secrets settings before running the AI review."
+            )
         else:
             try:
                 with st.status("Running the daily governance crew…", expanded=True) as status:
